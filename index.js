@@ -5,7 +5,6 @@ const exec = require('child_process').exec;
 const vue = require('rollup-plugin-vue')
 const buble = require('rollup-plugin-buble')
 const nodeResolve = require('rollup-plugin-node-resolve')
-const gzip = require("rollup-plugin-gzip")
 const uglify = require('rollup-plugin-uglify')
 const replace = require('rollup-plugin-replace')
 const fs = require('fs')
