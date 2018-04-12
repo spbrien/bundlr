@@ -17,10 +17,11 @@ prog
   .argument('<name>', 'Component name')
   .argument('<path>', 'Path to Vue component')
   .argument('<output>', 'Output Path')
+  .option('-s, --single', 'Create a single JS file with all dependencies included', prog.BOOL, false)
   .action(function(args, options, logger) {
     const rollup = require('rollup');
     const inputOptions = {
-      entry: `${__dirname}/src/main.js`,
+      entry: options.single ? `${__dirname}/src/single.js` : `${__dirname}/src/main.js`,
       plugins: [
           replace({
               'process.env.NODE_ENV': JSON.stringify('production'),
