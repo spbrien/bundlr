@@ -8,7 +8,8 @@
   },
   "author": "Steven Brien",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
+    "caporal": "^0.10.0",
     "cross-env": "^4.0.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6",
@@ -21,8 +22,5 @@
     "rollup-watch": "^3.2.2",
     "vue": "^2.2.6",
     "vue-custom-element": "^1.1.0"
-  },
-  "dependencies": {
-    "caporal": "^0.10.0"
   }
 }
