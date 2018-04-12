@@ -28,7 +28,7 @@ Include the script and element in your html:
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="./dist/custom-component.js"></script>
+  <script src="./output/path/custom-component.js"></script>
 </head>
 <body>
 <custom-component></custom-component>
@@ -55,7 +55,7 @@ Include the script and element in your html:
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-custom-element@3.0.2/dist/vue-custom-element.min.js"></script>
 
-  <script src="./dist/custom-component.js"></script>
+  <script src="./output/path/custom-component.js"></script>
 </head>
 <body>
 <custom-component></custom-component>
