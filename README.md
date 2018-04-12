@@ -5,7 +5,7 @@ A command line utility for packaging Vue components as web components / custom e
 ## Installation
 
 ```
-npm install -g git+ssh://git@github.com:spbrien/bundlr.git
+npm install -g git+https://git@github.com:spbrien/bundlr.git
 ```
 
 ## Usage
