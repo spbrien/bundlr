@@ -19,6 +19,7 @@ You can build as completely stand-alone and self contained scripts. This is usef
 Build your script:
 
 ```bash
+# bundlr <component name> <input file path> <output file path>
 bundlr custom-component ./path/to/custom-component.vue ./output/path/custom-component.js --single
 ```
 
@@ -43,6 +44,7 @@ You can also build components that use a global Vue instance instead of includin
 Build your script:
 
 ```bash
+# bundlr <component name> <input file path> <output file path>
 bundlr custom-component ./path/to/custom-component.vue ./output/path/custom-component.js
 ```
 
