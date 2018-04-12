@@ -38,8 +38,7 @@ prog
               css:true
           }),
           buble(),
-          uglify(),
-          gzip()
+          uglify()
       ],
     };
     const outputOptions = {
