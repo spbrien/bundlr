@@ -8,6 +8,7 @@ const nodeResolve = require('rollup-plugin-node-resolve')
 const uglify = require('rollup-plugin-uglify')
 const replace = require('rollup-plugin-replace')
 const commonjs = require('rollup-plugin-commonjs')
+const rollupjson = require('rollup-plugin-json')
 const fs = require('fs')
 const path = require('path')
 
@@ -21,7 +22,7 @@ prog
   .action(function(args, options, logger) {
     const rollup = require('rollup');
     const inputOptions = {
-      entry: options.single ? `${__dirname}/src/single.js` : `${__dirname}/src/main.js`,
+      input: options.single ? `${__dirname}/src/single.js` : `${__dirname}/src/main.js`,
       plugins: [
           replace({
               'process.env.NODE_ENV': JSON.stringify('production'),
@@ -30,10 +31,15 @@ prog
           }),
           nodeResolve({
               module: true,
+              main: true,
               jsnext: true,
-              main: true
+              preferBuiltins: true,
+              browser: true,
           }),
-          commonjs(),
+          commonjs({
+            include: 'node_modules/**'  // Default: undefined
+          }),
+          rollupjson(),
           vue({
               compileTemplate: true,
               css:true
@@ -43,9 +49,8 @@ prog
       ],
     };
     const outputOptions = {
-      dest: args.output,
+      file: args.output,
       format: 'iife',
-      name: args.name,
     };
     async function build() {
       // create a bundle
