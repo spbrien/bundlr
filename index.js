@@ -7,6 +7,7 @@ const buble = require('rollup-plugin-buble')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const uglify = require('rollup-plugin-uglify')
 const replace = require('rollup-plugin-replace')
+const commonjs = require('rollup-plugin-commonjs')
 const fs = require('fs')
 const path = require('path')
 
@@ -32,6 +33,7 @@ prog
               jsnext: true,
               main: true
           }),
+          commonjs(),
           vue({
               compileTemplate: true,
               css:true
