@@ -5,5 +5,5 @@ import VueCustomElement from 'vue-custom-element'
 Vue.use(VueCustomElement)
 
 // import and register your component(s)
-const customComponent = require(`${process.env.COMPONENT_PATH}`)
+const customComponent = require(process.env.COMPONENT_PATH)
 Vue.customElement(process.env.COMPONENT_NAME, customComponent)
