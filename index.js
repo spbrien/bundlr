@@ -2,11 +2,8 @@
 const prog = require('caporal');
 const exec = require('child_process').exec;
 
-const vue = require('rollup-plugin-vue')
-const buble = require('rollup-plugin-buble')
-const nodeResolve = require('rollup-plugin-node-resolve')
-const uglify = require('rollup-plugin-uglify')
-const replace = require('rollup-plugin-replace')
+const webpack = require("webpack");
+const rimraf = require('rimraf');
 const fs = require('fs')
 const path = require('path')
 
@@ -18,44 +15,68 @@ prog
   .argument('<output>', 'Output Path')
   .option('-s, --single', 'Create a single JS file with all dependencies included', prog.BOOL, false)
   .action(function(args, options, logger) {
-    const rollup = require('rollup');
-    const inputOptions = {
+    const webpackConfig = {
       entry: options.single ? `${__dirname}/src/single.js` : `${__dirname}/src/main.js`,
+      output: {
+        path: path.resolve(process.cwd(), args.output),
+        filename: `${args.name}.js`,
+      },
+      resolve: {
+        extensions: ['.js', '.vue'],
+        alias: {
+          'vue$': 'vue/dist/vue.common.js'
+        }
+      },
+      module: {
+        rules: [
+          {
+            test: /\.vue$/,
+            use: 'vue-loader'
+          },
+          {
+            test: /\.js$/,
+            use: 'babel-loader'
+          }
+        ]
+      },
+      devtool: '#source-map',
       plugins: [
-          replace({
-              'process.env.NODE_ENV': JSON.stringify('production'),
-              'process.env.COMPONENT_PATH': JSON.stringify(path.resolve(process.cwd(), args.path)),
-              'process.env.COMPONENT_NAME': JSON.stringify(args.name),
-          }),
-          nodeResolve({
-              module: true,
-              jsnext: true,
-              main: true
-          }),
-          vue({
-              compileTemplate: true,
-              css:true
-          }),
-          buble(),
-          uglify()
-      ],
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: '"production"',
+            COMPONENT_PATH: 'path.resolve(process.cwd(), args.path)',
+            COMPONENT_NAME: 'args.name',
+          }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+          // uncomment to enable sourcemap
+          // sourceMap: true,
+          compress: {
+            warnings: false
+          }
+        }),
+        new webpack.LoaderOptionsPlugin({
+          minimize: true
+        })
+      ]
     };
-    const outputOptions = {
-      dest: args.output,
-      format: 'iife',
-      name: args.name,
-    };
-    async function build() {
-      // create a bundle
-      const bundle = await rollup.rollup(inputOptions);
 
-      // generate code and a sourcemap
-      // const { code, map } = await bundle.generate(outputOptions);
-
-      // or write the bundle to disk
-      await bundle.write(outputOptions);
-    }
-    build();
+    rimraf(path.resolve(process.cwd(), args.output), () => {
+      webpack(webpackConfig, (err, stats) => {
+        if (err || stats.hasErrors()) {
+          process.stdout.write(stats.toString({
+            colors: true,
+            modules: false,
+            children: false, // If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
+            chunks: false,
+            chunkModules: false
+          }) + '\n\n')
+        } else {
+          console.log('Done!')
+        }
+        // Done processing
+      });
+    });
   });
 
 prog.parse(process.argv);
