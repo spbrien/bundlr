@@ -44,8 +44,8 @@ prog
         new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: '"production"',
-            COMPONENT_PATH: 'path.resolve(process.cwd(), args.path)',
-            COMPONENT_NAME: 'args.name',
+            COMPONENT_PATH: JSON.stringify(`${path.resolve(process.cwd(), args.path)}`),
+            COMPONENT_NAME: JSON.stringify(`${args.name}`),
           }
         }),
         new webpack.optimize.UglifyJsPlugin({
