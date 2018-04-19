@@ -1,11 +1,11 @@
-# Bundlr
+# Laika
 
 A command line utility for packaging Vue components as web components / custom elements.
 
 ## Installation
 
 ```
-npm install -g git+https://git@github.com:spbrien/bundlr.git
+npm install -g git+https://git@github.com:spbrien/laika.git
 ```
 
 ## Usage
@@ -19,7 +19,8 @@ You can build as completely stand-alone and self contained scripts. This is usef
 Build your script:
 
 ```bash
-bundlr custom-component ./path/to/custom-component.vue ./output/path/custom-component.js --single
+# laika <component name> <input file path> <output file path>
+laika custom-component ./path/to/custom-component.vue ./output/path/custom-component.js --single
 ```
 
 Include the script and element in your html:
@@ -43,7 +44,8 @@ You can also build components that use a global Vue instance instead of includin
 Build your script:
 
 ```bash
-bundlr custom-component ./path/to/custom-component.vue ./output/path/custom-component.js
+# laika <component name> <input file path> <output file path>
+laika custom-component ./path/to/custom-component.vue ./output/path/custom-component.js
 ```
 
 Include the script and element in your html:
