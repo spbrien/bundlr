@@ -7,6 +7,10 @@ const rimraf = require('rimraf');
 const fs = require('fs')
 const path = require('path')
 
+// TODO: Create init command
+// TODO: Create build command
+// TODO: Handle metadata for a component
+// TODO: Handle deployments and registry? or handle with cosmonaut?
 
 prog
   .version('1.0.0')
@@ -48,13 +52,13 @@ prog
             COMPONENT_NAME: JSON.stringify(`${args.name}`),
           }
         }),
-        new webpack.optimize.UglifyJsPlugin({
-          // uncomment to enable sourcemap
-          // sourceMap: true,
-          compress: {
-            warnings: false
-          }
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //   // uncomment to enable sourcemap
+        //   // sourceMap: true,
+        //   compress: {
+        //     warnings: false
+        //   }
+        // }),
         new webpack.LoaderOptionsPlugin({
           minimize: true
         })
