@@ -1,5 +1,6 @@
-const Vue = window.Vue
+import Vue from 'vue'
+import wrap from '@vue/web-component-wrapper'
 
-// import and register your component(s)
-const customComponent = require(process.env.COMPONENT_PATH)
-Vue.customElement(process.env.COMPONENT_NAME, customComponent)
+
+const CustomElement = wrap(Vue, () => import(`${process.env.COMPONENT_PATH}`))
+window.customElements.define(process.env.COMPONENT_NAME, CustomElement)
