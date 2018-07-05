@@ -1,4 +1,8 @@
-import Vue from 'vue'
+if (!window.Vue) {
+  const Vue = import('vue')
+} else {
+  const Vue = window.Vue
+}
 import wrap from '@vue/web-component-wrapper'
 
 
