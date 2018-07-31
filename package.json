@@ -1,6 +1,6 @@
 {
   "name": "laika",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Bundle Vue components as custom elements via the command line",
   "main": "index.js",
   "bin": {
