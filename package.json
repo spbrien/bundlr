@@ -24,6 +24,7 @@
     "cross-env": "^4.0.0",
     "css-loader": "^0.26.2",
     "file-loader": "^0.11.1",
+    "inline-css-webpack-loader": "^1.0.4",
     "rimraf": "^2.6.1",
     "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony",
     "uglifyjs-webpack-plugin": "^1.2.5",

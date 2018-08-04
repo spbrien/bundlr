@@ -18,7 +18,7 @@ prog
       entry: `${__dirname}/src/main.js`,
       output: {
         path: path.resolve(process.cwd(), args.output),
-        publicPath: "/dist/",
+        publicPath: `/${args.output}/`,
         filename: `${args.name}.js`,
       },
       resolve: {
